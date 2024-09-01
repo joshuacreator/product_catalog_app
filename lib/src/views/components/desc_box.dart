@@ -19,14 +19,31 @@ class DescriptionBox extends StatelessWidget {
           duration: const Duration(milliseconds: 700),
         ),
         context: context,
-        builder: (context) => const Column(
+        builder: (context) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 0.0),
               child: SectionTitle(text: "Description", isTitle: true),
             ),
-            Divider(),
+            Divider(
+              color: Colours.dividerColour,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                10.0,
+                0.0,
+                10.0,
+                10.0,
+              ),
+              child: Text(
+                desc,
+                maxLines: 7,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 12.0),
+              ),
+            ),
           ],
         ),
       ),
@@ -45,7 +62,7 @@ class DescriptionBox extends StatelessWidget {
                 action: Icon(Icons.keyboard_arrow_right),
               ),
             ),
-            const Divider(),
+            Divider(color: Colours.dividerColour.withOpacity(0.1)),
             Padding(
               padding: const EdgeInsets.fromLTRB(
                 10.0,
@@ -54,7 +71,7 @@ class DescriptionBox extends StatelessWidget {
                 10.0,
               ),
               child: Text(
-                "$desc " * 100,
+                desc,
                 maxLines: 7,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 12.0),

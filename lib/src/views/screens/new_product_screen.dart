@@ -6,7 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:product_catalog_app/src/controllers/hive_db_controller.dart';
+import 'package:product_catalog_app/src/models/product.dart';
 import 'package:product_catalog_app/src/services/image_service.dart';
+import 'package:product_catalog_app/src/utils/app_snack_bar.dart';
 import 'package:product_catalog_app/src/utils/colours.dart';
 import 'package:product_catalog_app/src/utils/constants.dart';
 import 'package:product_catalog_app/src/utils/dimensions.dart';
@@ -18,7 +21,9 @@ import 'package:product_catalog_app/src/views/components/text_form_field.dart';
 class NewProductScreen extends ConsumerStatefulWidget {
   static String name = "new-product", path = "new-product";
 
-  const NewProductScreen({super.key});
+  const NewProductScreen({super.key, this.product, this.productIndex});
+  final Product? product;
+  final int? productIndex;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -27,6 +32,7 @@ class NewProductScreen extends ConsumerStatefulWidget {
 
 class _NewProductScreenState extends ConsumerState<NewProductScreen> {
   File? image;
+
   final _formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
@@ -41,10 +47,26 @@ class _NewProductScreenState extends ConsumerState<NewProductScreen> {
     "Beauty & Personal Care",
   ];
 
-  bool loading = false;
+  bool loading = false, nullImage = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.product != null) {
+      _nameController.text = widget.product!.name;
+      _priceController.text = widget.product!.price.toString();
+      _descriptionController.text = widget.product!.description;
+      _categoryController.text = widget.product!.category;
+
+      image = File(widget.product!.image);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final productController = ref.watch(productsProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(title: const Text("New product")),
       body: Form(
@@ -85,6 +107,9 @@ class _NewProductScreenState extends ConsumerState<NewProductScreen> {
                   child: AppDropDownFormField(
                     hintText: "Select product category",
                     label: "Product category",
+                    value: widget.product != null
+                        ? _categoryController.text
+                        : null,
                     items: categories.map((category) {
                       return DropdownMenuItem<String>(
                         value: category,
@@ -118,13 +143,41 @@ class _NewProductScreenState extends ConsumerState<NewProductScreen> {
             ),
             const Gap(30.0),
             AppElevatedButton(
-              label: "Save",
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  // TODO: Save product
+              label: widget.product != null ? "Update" : "Save",
+              onPressed: () async {
+                if (image == null) {
                   setState(() {
-                    loading = !loading;
+                    nullImage = true;
                   });
+                  return;
+                }
+                if (_formKey.currentState!.validate()) {
+                  setState(() => loading = !loading);
+
+                  final Product product = Product(
+                    name: _nameController.text.trim(),
+                    description: _descriptionController.text.trim(),
+                    price: double.parse(_priceController.text.trim()),
+                    category: _categoryController.text.trim(),
+                    image: image!.path,
+                  );
+
+                  widget.product != null
+                      ? await productController
+                          .updateProduct(widget.productIndex!, product)
+                          .then((value) {
+                          context.pop();
+                          context.pop();
+                          showAppSnackBar(
+                              context, "Product updated successfully");
+                        })
+                      : await productController.addProduct(product).then(
+                          (value) {
+                            context.pop();
+                            showAppSnackBar(
+                                context, "Product created successfully");
+                          },
+                        );
                 }
               },
               loading: loading,
@@ -177,6 +230,7 @@ class _NewProductScreenState extends ConsumerState<NewProductScreen> {
         decoration: BoxDecoration(
           color: Colours.grey.withOpacity(0.3),
           borderRadius: BorderRadius.circular(Consts.kBorderRadiusTen),
+          border: nullImage ? Border.all(color: Colours.red, width: 1.5) : null,
         ),
         child: image == null
             ? Center(
@@ -185,12 +239,14 @@ class _NewProductScreenState extends ConsumerState<NewProductScreen> {
                   children: [
                     Icon(
                       Icons.image_rounded,
-                      color: Colours.grey,
+                      color: nullImage ? Colours.red : Colours.grey,
                       size: dimension * 2,
                     ),
                     Text(
                       "Tap to select image",
-                      style: TextStyle(color: Colours.secondaryText),
+                      style: TextStyle(
+                        color: nullImage ? Colours.red : Colours.secondaryText,
+                      ),
                     ),
                   ],
                 ),

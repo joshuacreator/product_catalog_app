@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:product_catalog_app/src/models/product.dart';
 import 'package:product_catalog_app/src/views/screens/home_screen.dart';
 import 'package:product_catalog_app/src/views/screens/notifications_screen.dart';
 import 'package:product_catalog_app/src/views/screens/product_details_screen.dart';
@@ -15,17 +16,23 @@ GoRouter router = GoRouter(
       ),
       routes: [
         GoRoute(
-          path: ProductDetailsScreen.path,
+          path: "${ProductDetailsScreen.path}/:productIndex",
           name: ProductDetailsScreen.name,
-          pageBuilder: (context, state) => const MaterialPage(
-            child: ProductDetailsScreen(),
+          pageBuilder: (context, state) => MaterialPage(
+            child: ProductDetailsScreen(
+              product: state.extra as Product,
+              productIndex: int.parse(state.pathParameters["productIndex"]!),
+            ),
           ),
         ),
         GoRoute(
-          path: NewProductScreen.path,
+          path: "${NewProductScreen.path}/:productIndex",
           name: NewProductScreen.name,
-          pageBuilder: (context, state) => const MaterialPage(
-            child: NewProductScreen(),
+          pageBuilder: (context, state) => MaterialPage(
+            child: NewProductScreen(
+              product: state.extra as Product?,
+              productIndex: int.parse(state.pathParameters["productIndex"]!),
+            ),
           ),
         ),
         GoRoute(

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:product_catalog_app/src/utils/colours.dart';
 import 'package:product_catalog_app/src/utils/constants.dart';
@@ -32,7 +34,7 @@ class ItemCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(Consts.kBorderRadiusTen),
-              child: Image.asset(img, fit: BoxFit.cover),
+              child: Image.file(File(img), fit: BoxFit.cover),
             ),
             Align(
               alignment: Alignment.bottomCenter,
