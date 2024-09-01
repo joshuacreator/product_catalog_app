@@ -20,15 +20,15 @@ class Dimensions {
 final dimension = Dimensions.dimension!;
 
 class ResponsiveSize {
-  static double screenWidth = 0;
-  static double screenHeight = 0;
-  static double blockSizeHorizontal = 0;
-  static double blockSizeVertical = 0;
+  static double screenWidth = 0.0;
+  static double screenHeight = 0.0;
+  static double blockSizeHorizontal = 0.0;
+  static double blockSizeVertical = 0.0;
 
-  static double _safeAreaHorizontal = 0;
-  static double _safeAreaVertical = 0;
-  static double safeBlockHorizontal = 0;
-  static double safeBlockVertical = 0;
+  static double _safeAreaHorizontal = 0.0;
+  static double _safeAreaVertical = 0.0;
+  static double safeBlockHorizontal = 0.0;
+  static double safeBlockVertical = 0.0;
 
   static void init(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:product_catalog_app/src/controllers/hive_db_controller.dart';
+import 'package:product_catalog_app/src/utils/assets.dart';
 import 'package:product_catalog_app/src/utils/colours.dart';
 import 'package:product_catalog_app/src/views/components/custom_search_bar.dart';
 import 'package:product_catalog_app/src/views/components/product_view_build.dart';
@@ -19,27 +21,37 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        ref.watch(productsProvider.notifier).loadProducts();
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     // ResponsiveSize.init(context);
     final products = ref.watch(productsProvider);
 
     return Scaffold(
-      // body: products.isEmpty
-      //     ? Center(child: SvgPicture.asset(AppImages.emptySvg))
-      //     :
-      body: ListView(
-        children: [
-          const Gap(10.0),
-          buildAppBar(),
-          const Gap(10.0),
-          const CustomSearchBar(),
-          const Gap(20.0),
-          buildProductGridView(
-            products: products,
-          ),
-          const Gap(10.0),
-        ],
-      ),
+      body: products.isEmpty
+          ? Center(child: SvgPicture.asset(AppImages.emptySvg))
+          : ListView(
+              children: [
+                const Gap(10.0),
+                buildAppBar(),
+                const Gap(10.0),
+                const CustomSearchBar(),
+                const Gap(20.0),
+                buildProductGridView(
+                  products: products,
+                ),
+                const Gap(10.0),
+              ],
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.pushNamed(

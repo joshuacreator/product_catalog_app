@@ -14,7 +14,7 @@ void main() async {
   /// Initialize Hive
   await Hive.initFlutter();
 
-  /// Register ProductAdapter
+  /// Register ProductAdapter and ProductsAdapter
   Hive.registerAdapter(ProductAdapter());
 
   /// Open products box on device storage
