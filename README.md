@@ -1,22 +1,6 @@
-# Product Catalog App - A Flutter App for Product Management
+# product_catalog_app
 
-This is a simple Flutter app that allows users to create, view, edit, and delete products. Each product has a name, price, description, category, and an optional image.
-
-## Features
-
-* Create new products
-* View a list of all products
-* Edit existing products
-* Delete products
-* View detailed information about a product
-* Search products by name
-* Local storage using `hive`
-* Routing with `go_router`
-* State management with `flutter_riverpod`
-* SVG image display with `flutter_svg`
-* Image picking with `image_picker`
-* Image cropping with `image_cropper`
-* Currency formatting with `intl`
+A new Flutter project.
 
 ## Getting Started
 
