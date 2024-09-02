@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:product_catalog_app/src/models/product.dart';
 import 'package:product_catalog_app/src/routes/routes.dart';
-import 'package:product_catalog_app/src/utils/responsive_size.dart';
+import 'package:product_catalog_app/src/utils/dimensions.dart';
 import 'package:product_catalog_app/src/utils/themes.dart';
 
 void main() async {

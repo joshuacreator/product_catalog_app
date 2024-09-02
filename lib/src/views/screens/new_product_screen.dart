@@ -12,7 +12,7 @@ import 'package:product_catalog_app/src/services/image_service.dart';
 import 'package:product_catalog_app/src/utils/app_snack_bar.dart';
 import 'package:product_catalog_app/src/utils/colours.dart';
 import 'package:product_catalog_app/src/utils/constants.dart';
-import 'package:product_catalog_app/src/utils/responsive_size.dart';
+import 'package:product_catalog_app/src/utils/dimensions.dart';
 import 'package:product_catalog_app/src/views/components/app_drop_down_form_field.dart';
 import 'package:product_catalog_app/src/views/components/buttons.dart';
 import 'package:product_catalog_app/src/views/components/section_title.dart';
