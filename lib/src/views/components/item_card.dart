@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:product_catalog_app/src/utils/colours.dart';
 import 'package:product_catalog_app/src/utils/constants.dart';
-import 'package:product_catalog_app/src/utils/dimensions.dart';
+import 'package:product_catalog_app/src/utils/responsive_size.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({
