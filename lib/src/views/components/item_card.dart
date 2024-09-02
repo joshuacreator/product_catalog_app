@@ -24,7 +24,7 @@ class ItemCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(Consts.kBorderRadiusTen),
       child: Ink(
-        width: dimension * 5,
+        width: ResponsiveSize.setWidth(45),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Consts.kBorderRadiusTen),
         ),
@@ -40,7 +40,7 @@ class ItemCard extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 5.0),
-                height: dimension * 2,
+                height: ResponsiveSize.setHeight(10),
                 alignment: Alignment.bottomCenter,
                 width: double.maxFinite,
                 decoration: BoxDecoration(

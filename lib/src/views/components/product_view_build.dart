@@ -60,6 +60,7 @@ Widget buildProductHorizontalList({
             onTap: () {
               context.pushNamed(
                 ProductDetailsScreen.name,
+                pathParameters: {"productIndex": index.toString()},
                 extra: products[index],
               );
             },

@@ -1,24 +1,5 @@
 import 'package:flutter/material.dart';
 
-class Dimensions {
-  static MediaQueryData? _mediaQuery;
-  static double? height;
-  static double? width;
-  static double? dimension;
-  static Orientation? orientation;
-
-  void init(BuildContext context) {
-    _mediaQuery = MediaQuery.of(context);
-    height = _mediaQuery!.size.height;
-    width = _mediaQuery!.size.width;
-
-    dimension =
-        orientation == Orientation.landscape ? height! * 0.1 : width! * 0.1;
-  }
-}
-
-final dimension = Dimensions.dimension!;
-
 class ResponsiveSize {
   static double screenWidth = 0.0;
   static double screenHeight = 0.0;

@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Dimensions().init(context);
     ResponsiveSize.init(context);
 
     return MaterialApp.router(

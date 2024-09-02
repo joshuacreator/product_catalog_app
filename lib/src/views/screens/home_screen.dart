@@ -33,7 +33,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ResponsiveSize.init(context);
     final products = ref.watch(productsProvider);
 
     return Scaffold(

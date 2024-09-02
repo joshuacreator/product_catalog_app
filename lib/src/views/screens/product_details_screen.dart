@@ -74,7 +74,7 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                 icon: const Icon(Icons.delete_rounded),
               ),
             ],
-            expandedHeight: Dimensions.height! / 2.3,
+            expandedHeight: ResponsiveSize.setHeight(45),
           ),
           SliverList(
             delegate: SliverChildListDelegate(

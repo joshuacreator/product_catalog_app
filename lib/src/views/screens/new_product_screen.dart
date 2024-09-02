@@ -226,7 +226,7 @@ class _NewProductScreenState extends ConsumerState<NewProductScreen> {
       ),
       borderRadius: BorderRadius.circular(Consts.kBorderRadiusTen),
       child: Ink(
-        height: dimension * 6,
+        height: ResponsiveSize.setWidth(45),
         decoration: BoxDecoration(
           color: Colours.grey.withOpacity(0.3),
           borderRadius: BorderRadius.circular(Consts.kBorderRadiusTen),
@@ -240,7 +240,7 @@ class _NewProductScreenState extends ConsumerState<NewProductScreen> {
                     Icon(
                       Icons.image_rounded,
                       color: nullImage ? Colours.red : Colours.grey,
-                      size: dimension * 2,
+                      size: ResponsiveSize.setHeight(10),
                     ),
                     Text(
                       "Tap to select image",
