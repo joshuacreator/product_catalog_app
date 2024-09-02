@@ -1,4 +1,4 @@
-# Product Catalog App - Pro A Flutter App for Product Management
+# Product Catalog App - A Flutter App for Product Management
 
 This is a simple Flutter app that allows users to create, view, edit, and delete products. Each product has a name, price, description, category, and an optional image.
 
