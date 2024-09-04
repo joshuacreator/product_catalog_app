@@ -1,3 +1,8 @@
+![Home Screen Preview](/assets/screenshots/home_preview.png)
+![Details Screen Preview](/assets/screenshots/details_preview.png)
+![Edit Screen Preview](/assets/screenshots/edit_preview.png)
+![Search Screen Preview](/assets/screenshots/search_preview.png)
+
 # Product Catalog App - A Flutter App for Product Management
 
 This is a simple Flutter app that allows users to create, view, edit, and delete products. Each product has a name, price, description, category, and an image.
@@ -40,7 +45,7 @@ This is a simple Flutter app that allows users to create, view, edit, and delete
 1. Clone this repository.
 2. Open the project in your favorite IDE.
 3. Run `flutter pub get` to download the above listed dependencies
-3. Run the app using `flutter run`.
+4. Run the app using `flutter run`.
 
 ### Project Structure
 
